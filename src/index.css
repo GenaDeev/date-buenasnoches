@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection, ::-moz-selection {
+  background-color: rgba(246, 231, 96, 0.507);
+}
+.double {
+  display: flex !important;
+  align-items: center;
+  height: 50px;
+  gap: 0;
+}
+.double span {
+  margin-bottom: -10px;
+  height: 100%;
+}
+.double div {
+  display: flex !important;
+  height: auto;
+  align-items: start;
+  justify-content: left;
+}
+.menu ul .active {
+  background-color: black;
+}
+.gradient-text {
+  background: linear-gradient(180deg,#000000, #fff);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title-gradient {
+  background: linear-gradient(180deg, #c6c304, #e6e03a);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.subtitle-gradient {
+  background: linear-gradient(180deg,#fff, #e0e0e0);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.eye-blue {
+  color: #50d4d4 !important;
+}
+.eye-green {
+  color: #439c57 !important;
+}
+.eye-brown {
+  color: #644b2f !important
+}
