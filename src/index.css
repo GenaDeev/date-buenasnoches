@@ -56,3 +56,12 @@
 .eye-brown {
   color: #644b2f !important
 }
+
+.music-player  {
+  width: 100%;
+  height: 100%;
+}
+
+.smiths {
+  background-image: url('/music/smiths.webp');
+}

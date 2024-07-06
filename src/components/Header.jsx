@@ -30,17 +30,17 @@ export default function Header() {
                             <details>
                                 <summary>Opciones</summary>
                                 <ul className="bg-gray-100 rounded-t-none p-2">
-                                    <li><NavLink to="/ursu" className="bg-white">Ursu 💫</NavLink></li>
-                                    <li><NavLink to="/hele" className="bg-white">Hele 😇</NavLink></li>
-                                    <li><NavLink to="/ivan" className="bg-white">Ivan 🎨</NavLink></li>
-                                    <li><NavLink to="/lolita" className="bg-white">Lolita 🎨</NavLink></li>
+                                    <li><NavLink to="/ursu" className="bg-white">Ursu 🌊</NavLink></li>
+                                    <li><NavLink to="/hele" className="bg-white">Hele 🌻</NavLink></li>
+                                    <li><NavLink to="/ivan" className="bg-white">Ivan 🖤</NavLink></li>
+                                    <li><NavLink to="/lolita" className="bg-white">Lolita 💌</NavLink></li>
                                 </ul>
                             </details>
                         </li>
                     </ul>
                 </div>
             </nav>
-            <div className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% h-[2px]"></div>
+            <div className="opacity-50 shadow-2xl bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% h-[2px]"></div>
         </header>
     )
 }
