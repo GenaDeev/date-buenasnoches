@@ -41,7 +41,7 @@ export const oasis = {
 }
 
 export const gday = {
-    "name": "The Smiths",
+    "name": "Green Day",
     "url": "https://open.spotify.com/intl-es/artist/7oPftvlwr6VrsViSDV7fJY",
     "sample": "",
     "id": "gday"
@@ -69,7 +69,7 @@ export const cuarteto = {
 }
 
 export const charly = {
-    "name": "The Smiths",
+    "name": "Charly García",
     "url": "https://open.spotify.com/intl-es/artist/3jO7X5KupvwmWTHGtHgcgo",
     "sample": "",
     "id": "charly"
