@@ -88,6 +88,20 @@ export default function MusicPlayer({ music, person }) {
         };
     }, [navigate]);
 
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.code === 'Space') {
+                togglePlay();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isPlaying]);
 
     const formatTime = (timeInSeconds) => {
         const minutes = Math.floor(timeInSeconds / 60);
