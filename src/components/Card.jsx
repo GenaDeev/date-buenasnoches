@@ -6,12 +6,12 @@ import Eye
 export default function Card(props) {
     const { name, eyes, height, hair, age, gender, likes, url, images, ig } = props;
     return (
-        <article className="card flex flex-col w-[300px] h-[700px] bg-gray-200 hover:bg-gray-300 transition duration-200 justify-start">
+        <article key={name.toLowerCase()} className="card flex flex-col w-[300px] h-[700px] bg-gray-200 hover:bg-gray-300 transition duration-200 justify-start">
             <div id="default-carousel" className="relative w-full" data-carousel="slide">
                 <Carousel className="relative max-h-[300px] h-56 overflow-hidden rounded-t-lg md:h-96">
                     {
                         images.map((image, index) => (
-                            <img src={image} className="absolute object-cover block w-full h-[300px] -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt={`Imagen número ${index + 1} de ${name}`} />
+                            <img key={"image-"+name.toLowerCase()} src={image} className="absolute object-cover block w-full h-[300px] -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt={`Imagen número ${index + 1} de ${name}`} />
                         ))
                     }
                 </Carousel>

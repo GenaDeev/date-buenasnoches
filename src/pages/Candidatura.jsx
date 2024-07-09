@@ -5,7 +5,7 @@ import NotFound from "./NotFound";
 export default function Candidatura() {
     const { id } = useParams();
     const [candidatura, setCandidatura] = useState(null);
-    const [exists, setExists] = useState(false);
+    const [exists, setExists] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
