@@ -69,7 +69,7 @@ export default function Apply() {
     };
 
     return (
-        <div className="max-w-lg mx-auto py-[64px] pt-[150px] px-6">
+        <div className="max-w-lg mx-auto bg-white py-[64px] pt-[150px] px-6">
             {!isCompleted && !isError && (
                 <div>
                     <h1 className='text-4xl mb-12'>Solicitud para <strong className='capitalize'>{persona}</strong></h1>
@@ -101,26 +101,36 @@ export default function Apply() {
 
                         <div>
                             <label className="block font-medium text-gray-700">Preferencia Sexual</label>
-                            <div className="mt-1">
-                                <input type="radio" id="heterosexual" name="preferenciaSexual" value="Heterosexual" onChange={(e) => setPreferenciaSexual(e.target.value)} required />
-                                <label htmlFor="heterosexual" className="ml-2 text-gray-700">Heterosexual</label>
-                                <input type="radio" id="homosexual" name="preferenciaSexual" value="Homosexual" onChange={(e) => setPreferenciaSexual(e.target.value)} required />
-                                <label htmlFor="homosexual" className="ml-2 text-gray-700">Homosexual</label>
-                                {/* Agregar más opciones de radio según las preferencias sexuales requeridas */}
+                            <div className="mt-1 flex items-center gap-2">
+                                <div className='flex items-center'>
+                                    <input type="radio" id="heterosexual" name="preferenciaSexual" value="Heterosexual" onChange={(e) => setPreferenciaSexual(e.target.value)} required />
+                                    <label htmlFor="heterosexual" className="ml-2 text-gray-700">Heterosexual</label>
+                                </div>
+                                <div className='flex items-center'>
+                                    <input type="radio" id="homosexual" name="preferenciaSexual" value="Homosexual" onChange={(e) => setPreferenciaSexual(e.target.value)} required />
+                                    <label htmlFor="homosexual" className="ml-2 text-gray-700">Homosexual</label>
+                                </div>
                             </div>
                         </div>
 
                         <div>
                             <label className="block font-medium text-gray-700">Género con el que se identifica</label>
-                            <div className="mt-1">
-                                <input type="radio" id="masculino" name="genero" value="Masculino" onChange={(e) => setGenero(e.target.value)} required />
-                                <label htmlFor="masculino" className="ml-2 text-gray-700">Masculino</label>
-                                {/* Agregar más opciones de radio según los géneros requeridos */}
-                                <input type="radio" id="otro" name="genero" value="Otro" onChange={(e) => setGenero(e.target.value)} />
-                                <label htmlFor="otro" className="ml-2 text-gray-700">Otro</label>
-                                {genero === 'Otro' && (
-                                    <input type="text" value={otroGenero} onChange={(e) => setOtroGenero(e.target.value)} placeholder="Especificar otro género" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                )}
+                            <div className="mt-1 flex items-center gap-2">
+                                <div className='flex items-center'>
+                                    <input type="radio" id="masculino" name="genero" value="Masculino" onChange={(e) => setGenero(e.target.value)} required />
+                                    <label htmlFor="masculino" className="ml-2 text-gray-700">Masculino</label>
+                                </div>
+                                <div className='flex items-center'>
+                                    <input type="radio" id="femenino" name="genero" value="Femenino" onChange={(e) => setGenero(e.target.value)} required />
+                                    <label htmlFor="femenino" className="ml-2 text-gray-700">Femenino</label>
+                                </div>
+                                <div className='flex items-center'>
+                                    <input type="radio" id="otro" name="genero" value="Otro" onChange={(e) => setGenero(e.target.value)} />
+                                    <label htmlFor="otro" className="ml-2 text-gray-700">Otro</label>
+                                    {genero === 'Otro' && (
+                                        <input type="text" value={otroGenero} onChange={(e) => setOtroGenero(e.target.value)} placeholder="Especificar otro género" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    )}
+                                </div>
                             </div>
                         </div>
 
