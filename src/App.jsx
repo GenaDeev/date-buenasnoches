@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -6,9 +7,12 @@ import PersonaProfile from './pages/PersonaProfile'
 import Aplicar from './pages/Apply'
 import NotFound from './pages/NotFound'
 import Candidatura from "./pages/Candidatura"
-
+import getOneSignal from "./tools/getOneSignal"
 
 export default function App() {
+    useEffect(() => {
+        getOneSignal();
+      })
     return (
         <BrowserRouter>
             <Header />
