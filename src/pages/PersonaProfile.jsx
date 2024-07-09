@@ -53,7 +53,7 @@ export default function PersonaProfile() {
                         </li>
                     </ul>
                     <div className="flex items-center gap-4">
-                        <Link to={"/apply/" + persona}
+                        <Link to={"/aplicar/" + persona}
                             className="flex items-center gap-2 justify-center rounded-full border border-solid border-pink-600 bg-pink-600 py-3 px-4 text-sm font-semibold text-white whitespace-nowrap shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:bg-pink-700 hover:border-pink-700">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#fff" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -125,7 +125,7 @@ export default function PersonaProfile() {
                     </div>
                     <div
                     className="music-container rounded-xl bg-gray-200 p-4 w-full sm:w-64 h-64">
-                        <MusicPlayer music={personaData.music}/>
+                        <MusicPlayer music={personaData.music} person={personaData}/>
                     </div>
                 </div>
 

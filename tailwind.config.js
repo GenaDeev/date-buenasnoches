@@ -9,7 +9,11 @@ export default {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      dropShadow: {
+        'gena': '0 35px 35px #1db954'
+      }
+    },
   },
   plugins: [daisyui, flowbite.plugin()],
 }
