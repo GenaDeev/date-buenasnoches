@@ -5,6 +5,8 @@ export default function MusicPlayer({ music, person }) {
     const [isPlaying, setIsPlaying] = useState(false); // Estado de reproducción
     const [progress, setProgress] = useState(0); // Estado de progreso en porcentaje
     const [modalVisibility, setModalVisibility] = useState(true)
+    const [duration, setDuration] = useState(0)
+    const [currentTime, setCurrentTime] = useState(0)
     const audioRef = useRef(null);
     const navigate = useNavigate()
     // Función para manejar la reproducción y pausa
@@ -20,20 +22,46 @@ export default function MusicPlayer({ music, person }) {
     // Funciones para avanzar y retroceder la música
     const next = () => {
         setPlaying(playing + 1)
-        if (playing === 3) {
+        setTimeout(() => {
+            audioRef.current.play();
+            setCurrentTime(audioRef.current.currentTime)
+            setDuration(audioRef.current.duration)
+            setProgress(0)
+        }, 100);
+        if (playing === 5) {
             setPlaying(0)
+            setTimeout(() => {
+                audioRef.current.play();
+                setCurrentTime(audioRef.current.currentTime)
+                setDuration(audioRef.current.duration)
+                setProgress(0)
+            }, 100);
         }
     };
     const back = () => {
         setPlaying(playing - 1)
+        setTimeout(() => {
+            audioRef.current.play();
+            setCurrentTime(audioRef.current.currentTime)
+            setDuration(audioRef.current.duration)
+            setProgress(0)
+        }, 100);
         if (playing === 0) {
-            setPlaying(3)
+            setPlaying(5)
+            setTimeout(() => {
+                audioRef.current.play();
+                setCurrentTime(audioRef.current.currentTime)
+                setDuration(audioRef.current.duration)
+                setProgress(0)
+            }, 100);
         }
     };
 
     // Actualización del progreso de la música
     const handleProgress = () => {
-        const percent = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+        setCurrentTime(audioRef.current.currentTime)
+        setDuration(audioRef.current.duration)
+        const percent = (currentTime / duration) * 100;
         setProgress(percent);
     };
     // Check if music array is empty or playing index is out of bounds
@@ -43,7 +71,12 @@ export default function MusicPlayer({ music, person }) {
 
     const handleModalHiding = () => {
         setModalVisibility(false)
-        setIsPlaying(true)
+        setTimeout(() => {
+            audioRef.current.play();
+            setCurrentTime(audioRef.current.currentTime)
+            setDuration(audioRef.current.duration)
+            setIsPlaying(true)
+        }, 100);
     }
 
     useEffect(() => {
@@ -56,7 +89,16 @@ export default function MusicPlayer({ music, person }) {
     }, [navigate]);
 
 
+    const formatTime = (timeInSeconds) => {
+        const minutes = Math.floor(timeInSeconds / 60);
+        const seconds = Math.floor(timeInSeconds % 60);
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+        const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+        return `${formattedMinutes}:${formattedSeconds}`;
+    };
+
     const musicclass = 'music-player ' + music[playing].id;
+
     return (
         <div className={
             !modalVisibility ? musicclass : "player h-full " + person.name.toLowerCase()
@@ -66,7 +108,7 @@ export default function MusicPlayer({ music, person }) {
                     <>
                         <div className='bg-[#00000072] backdrop-blur rounded-xl p-2 flex items-center flex-col'>
                             <audio
-                                src={music[playing].sample}
+                                src={"/music/samples/" + music[playing].id + ".mp3"}
                                 ref={audioRef}
                                 onTimeUpdate={handleProgress}
                                 onEnded={() => setIsPlaying(false)} // Pausar al terminar
@@ -102,19 +144,30 @@ export default function MusicPlayer({ music, person }) {
                                     </svg>
                                 </button>
                             </div>
-                            <div className="progress-bar relative w-full flex py-1">
-                                {/*audioRef.current.currentTime*/}
-                                <div className='anti-progress top-0 absolute h-2 w-full rounded-xl bg-gray-400'></div>
-                                <div
-                                    className="progress top-0 absolute h-2 bg-white"
-                                    style={{ width: `${progress}%` }}
-                                />
-                                {/*audioRef.current.duration*/}
+                            <div className="progress-bar relative w-full text-white font-bold flex py-1">
+                                {audioRef.current && (
+                                    <div className="w-full flex justify-between items-center">
+                                        <div className="flex items-center">
+                                            <span className="current-time pt-2 mr-2">
+                                                {formatTime(currentTime)}
+                                            </span>
+                                            <div className='anti-progress top-0 absolute h-2 w-full rounded-xl bg-gray-400'></div>
+                                            <div
+                                                className="progress top-0 absolute h-2 bg-white"
+                                                style={{ width: `${progress}%` }}
+                                            />
+                                        </div>
+                                        <span className="duration pt-2 ml-2">
+                                            {formatTime(duration)}
+                                        </span>
+                                    </div>
+                                )}
                             </div>
+
                         </div>
                         <footer className="bottom">
                             <p className="artist-sub">Reproduciendo:</p>
-                            <p className="artist">{music[playing].name}</p>
+                            <a href={music[playing].url} className="artist">{music[playing].name}</a>
                         </footer></> :
                     <div className='w-full text-xl h-full gap-2 flex flex-col justify-center'>
                         <svg xmlns="http://www.w3.org/2000/svg" className="text-[#1db954] drop-shadow-gena" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">

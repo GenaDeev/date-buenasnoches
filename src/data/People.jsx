@@ -1,4 +1,4 @@
-import { smiths, lana, blur, taylor, louis, oasis, piojos, gday, maneskin, wos, cuarteto, charly, spinetta, fito, frank } from './Music'
+import { smiths, lana, blur, taylor, louis, oasis, piojos, gday, maneskin, wos, cuarteto, charly, spinetta, fito, frank, tanbionica, nirvana, sofadown, beatles, billie } from './Music'
 
 export const people = [
     {
@@ -18,7 +18,7 @@ export const people = [
         ],
         "id": 1,
         "music": [
-            smiths, lana, blur, taylor
+            smiths, lana, blur, taylor, tanbionica, fito
         ]
     },
     {
@@ -38,7 +38,7 @@ export const people = [
         ],
         "id": 2,
         "music": [
-            louis, oasis, piojos, taylor
+            louis, oasis, piojos, taylor, beatles, wos
         ]
     },
     {
@@ -58,7 +58,7 @@ export const people = [
         ],
         "id": 3,
         "music": [
-            gday, maneskin, wos, cuarteto
+            gday, maneskin, wos, cuarteto, nirvana, sofadown
         ]
     },
     {
@@ -78,7 +78,7 @@ export const people = [
         ],
         "id": 4,
         "music": [
-            charly, spinetta, frank, fito
+            charly, spinetta, frank, fito, billie, smiths
         ]
     }
 ]

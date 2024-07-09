@@ -94,48 +94,63 @@
 }
 
 .smiths {
-  background-image: url('/music/smiths.webp');
+  background-image: url('/music/images/smiths.webp');
 }
 .lana {
-  background-image: url('/music/lana.webp');
+  background-image: url('/music/images/lana.webp');
 }
 .blur {
-  background-image: url('/music/blur.webp');
+  background-image: url('/music/images/blur.webp');
   filter: none !important;
 }
 .taylor {
-  background-image: url('/music/taylor.webp');
+  background-image: url('/music/images/taylor.webp');
 }
 .louis {
-  background-image: url('/music/louis.webp');
+  background-image: url('/music/images/louis.webp');
 }
 .oasis {
-  background-image: url('/music/oasis.webp');
+  background-image: url('/music/images/oasis.webp');
 }
 .gday {
-  background-image: url('/music/gday.webp');
+  background-image: url('/music/images/gday.webp');
 }
 .maneskin {
-  background-image: url('/music/maneskin.webp');
+  background-image: url('/music/images/maneskin.webp');
 }
 .wos {
-  background-image: url('/music/wos.webp');
+  background-image: url('/music/images/wos.webp');
 }
 .cuarteto {
-  background-image: url('/music/cuarteto.webp');
+  background-image: url('/music/images/cuarteto.webp');
 }
 .charly {
-  background-image: url('/music/charly.webp');
+  background-image: url('/music/images/charly.webp');
 }
 .spinetta {
-  background-image: url('/music/spinetta.webp');
+  background-image: url('/music/images/spinetta.webp');
 }
 .fito {
-  background-image: url('/music/fito.webp');
+  background-image: url('/music/images/fito.webp');
 }
 .frank {
-  background-image: url('/music/frank.webp');
+  background-image: url('/music/images/frank.webp');
 }
 .piojos {
-  background-image: url('/music/piojos.webp');
+  background-image: url('/music/images/piojos.webp');
+}
+.nirvana {
+  background-image: url('/music/images/nirvana.webp');
+}
+.sofadown {
+  background-image: url('/music/images/sofadown.webp');
+}
+.beatles {
+  background-image: url('/music/images/beatles.webp');
+}
+.billie {
+  background-image: url('/music/images/billie.webp');
+}
+.tanbionica {
+  background-image: url('/music/images/tanbionica.webp');
 }
