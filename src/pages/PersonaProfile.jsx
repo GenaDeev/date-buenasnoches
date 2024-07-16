@@ -1,14 +1,27 @@
 import { Link, useParams } from "react-router-dom"
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import Modal from 'react-modal';
 import { people } from '../data/People'
 import NotFound from './NotFound'
 import Eye from "../components/Eye";
 import MusicPlayer from "../components/MusicPlayer";
 import { capitalizeFirstLetter, setTitle } from "../tools/Utils";
 
+Modal.setAppElement('#root'); // Necesario para accesibilidad
+
 export default function PersonaProfile() {
     const { persona } = useParams();
     const personaData = people.find(person => person.url === `/${persona}`);
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
 
     if (!personaData) {
         return <NotFound />;
@@ -17,14 +30,14 @@ export default function PersonaProfile() {
     useEffect(() => {
         const title = "Perfil de " + capitalizeFirstLetter(persona) + ' | Comi Buenas Noches'
         setTitle(title)
-    })
+    }, [persona])
 
     return (
         <section className="relative pt-36 pb-24 bg-white">
             <img src="https://pagedone.io/asset/uploads/1705471739.png" alt="cover-image" className="w-full absolute top-0 left-0 z-0 h-60" />
             <div className="w-full mx-auto md:px-8 px-20">
                 <div className="flex items-center justify-center relative z-1 mb-2.5">
-                    <img src={personaData.images[0]} alt="user-avatar-image" className="hover:scale-105 transition duration-200 shadow-xl hover:shadow-2xl border-4 border-solid border-white rounded-full object-cover w-[162px] h-[162px]" />
+                    <img src={personaData.images[0]} alt="user-avatar-image" onClick={openModal} className="hover:scale-105 transition duration-200 shadow-xl hover:shadow-2xl border-4 border-solid border-white rounded-full object-cover w-[162px] h-[162px] cursor-pointer" />
                 </div>
                 <div className="flex flex-col sm:flex-row max-sm:gap-5 items-center justify-between mb-5">
                     <ul className="flex items-center gap-5">
@@ -79,14 +92,32 @@ export default function PersonaProfile() {
                         className="p-3 rounded-full border border-solid border-gray-300 bg-gray-50 group transition-all duration-500 hover:bg-pink-700 hover:border-pink-700">
                         <svg className="stroke-red-600 transition-all duration-500 group-hover:strokeWhite" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M14.1667 5.83333V5.875M9.16673 17.5H10.8334C13.9761 17.5 15.5474 17.5 16.5237 16.5237C17.5001 15.5474 17.5001 13.976 17.5001 10.8333V9.16667C17.5001 6.02397 17.5001 4.45262 16.5237 3.47631C15.5474 2.5 13.9761 2.5 10.8334 2.5H9.16673C6.02403 2.5 4.45268 2.5 3.47637 3.47631C2.50006 4.45262 2.50006 6.02397 2.50006 9.16667V10.8333C2.50006 13.976 2.50006 15.5474 3.47637 16.5237C4.45268 17.5 6.02403 17.5 9.16673 17.5ZM13.3334 10C13.3334 11.8409 11.841 13.3333 10.0001 13.3333C8.15911 13.3333 6.66673 11.8409 6.66673 10C6.66673 8.15905 8.15911 6.66667 10.0001 6.66667C11.841 6.66667 13.3334 8.15905 13.3334 10Z"
-                                stroke="" strokeWidth="1.6" strokeLinecap="round" />
+                                d="M14.1667 5.83333V5.875M9.16673 17.5H10.8334C13.9761 17.5 15.5474 17.5 16.5237 16.5237C17.5001 15.5474 17.5001 13.976 17.5001 10.8333V9.16667C17.5001 6.02397 17.5001 4.45262 16.5237 3.47631C15.5474 2.5 13.9761 2.5 10.8334 2.5H9.16673C6.02403 2.5 4.45268 2.5 3.47637 3.47631C2.50006 4.45262 2.50006 6.02397 2.50006 9.16667V10.8333C2.50006 13.976 2.50006 15.5474 3.47637 16.5237C4.45268 17.5 6.02403 17.5 9.16673 17.5Z"
+                                strokeWidth="1.6" strokeLinecap="round" />
+                            <path
+                                d="M14.1667 9.71667C14.1667 11.9658 12.3825 13.75 10.1334 13.75C7.88432 13.75 6.1001 11.9658 6.1001 9.71667C6.1001 7.46756 7.88432 5.68333 10.1334 5.68333C12.3825 5.68333 14.1667 7.46756 14.1667 9.71667Z"
+                                strokeWidth="1.6" strokeLinecap="round" />
+                        </svg>
+                    </a>
+                    <a href={"https://twitter.com/" + personaData.tw}
+                        className="p-3 rounded-full border border-solid border-gray-300 bg-gray-50 group transition-all duration-500 hover:bg-pink-700 hover:border-pink-700">
+                        <svg className="stroke-red-600 transition-all duration-500 group-hover:strokeWhite" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M17.4999 5.20868C16.9644 5.46825 16.3803 5.63473 15.7666 5.69999C16.3962 5.32334 16.8776 4.72613 17.1001 4.02317C16.514 4.37053 15.8684 4.61214 15.1884 4.73246C14.6347 4.1523 13.861 3.79999 13.0166 3.79999C11.4804 3.79999 10.2332 5.04718 10.2332 6.58334C10.2332 6.8439 10.2582 7.09756 10.3064 7.34148C7.81967 7.20442 5.67412 5.99999 4.16656 4.1568C3.88503 4.62861 3.72295 5.18712 3.72295 5.78524C3.72295 6.91757 4.33859 7.90995 5.26987 8.4516C4.77255 8.43625 4.29745 8.30661 3.87745 8.08656C3.87745 8.09955 3.87745 8.1149 3.87745 8.12925C3.87745 9.62773 5.00248 10.845 6.45614 11.1413C6.18424 11.2152 5.89197 11.2583 5.58586 11.2583C5.37484 11.2583 5.17194 11.2366 4.97078 11.1936C5.38912 12.3871 6.56464 13.25 7.97375 13.275C6.86104 14.0697 5.4994 14.5313 4.02834 14.5313C3.77237 14.5313 3.51919 14.516 3.26984 14.485C4.69199 15.3314 6.38173 15.8 8.19851 15.8C13.0128 15.8 15.6633 11.3 15.6633 7.01667C15.6633 6.87534 15.6633 6.73576 15.6556 6.59517C16.248 6.17679 16.7694 5.66467 17.1999 5.08452L17.4999 5.20868Z"
+                                strokeWidth="1.6" strokeLinecap="round" />
+                        </svg>
+                    </a>
+                    <a href={"https://discord.com/" + personaData.dc}
+                        className="p-3 rounded-full border border-solid border-gray-300 bg-gray-50 group transition-all duration-500 hover:bg-pink-700 hover:border-pink-700">
+                        <svg className="stroke-red-600 transition-all duration-500 group-hover:strokeWhite" width="20" height="20" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M8.173 15.981c.756.396 1.557.705 2.396.91m3.262-.91a11.954 11.954 0 0 0 2.39-.905M7.5 17.5c1.465 1.058 3.21 1.6 5.021 1.5 1.586-.075 3.06-.594 4.328-1.494a15.998 15.998 0 0 0 3.812-11.934c-.476-.567-1.233-1.295-1.52-1.561a18.362 18.362 0 0 0-4.44-2.377m-5.155 0a18.5 18.5 0 0 0-4.447 2.385c-.372.355-1.123 1.07-1.588 1.625a16.066 16.066 0 0 0 3.824 11.94M14 9c-.036.64-.497 1.159-1.092 1.159-.594 0-1.056-.52-1.092-1.159m-2.816 0c-.036.64-.497 1.159-1.092 1.159-.594 0-1.056-.52-1.092-1.159"
+                                strokeWidth="1.6" strokeLinecap="round" />
                         </svg>
                     </a>
                 </div>
-            </div>
-
-            <div className="w-full flex flex-col items-center text-gray-900 mt-32">
+                <div className="w-full flex flex-col items-center text-gray-900 mt-32">
                 <h2 className="text-3xl font-bold">
                     Mas info
                 </h2>
@@ -133,10 +164,24 @@ export default function PersonaProfile() {
                     <div
                     className="music-container rounded-xl bg-gray-200 p-4 w-full sm:w-64 h-64">
                         <MusicPlayer music={personaData.music} person={personaData}/>
-                    </div>
+                    </div></div>
                 </div>
-
+            </div>
+            <div onClick={closeModal}>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                shouldCloseOnOverlayClick={true}
+                shouldCloseOnEsc={true}
+                className="flex items-center justify-center fixed top-0 left-0 bg-black h-screen w-screen bg-opacity-50"
+                overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+            >
+                <div className="relative h-[300px] w-[300px] animate-zoomIn">
+                    <button onClick={closeModal} className="absolute top-2 right-2 text-white text-4xl">×</button>
+                    <img src={personaData.images[0]} alt="user-avatar-image" className="w-full h-full object-cover rounded-full " />
+                </div>
+            </Modal>
             </div>
         </section>
-    )
+    );
 }
