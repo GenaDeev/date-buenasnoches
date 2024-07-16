@@ -1,6 +1,13 @@
 import Card from "../components/Card";
 import { people } from "../data/People"
+import { setTitle } from "../tools/Utils";
+import { useEffect } from "react";
+
 export default function Home() {
+    useEffect(() => {
+        setTitle("Comi Buenas Noches | Sali con un admin.")
+    })
+
     return (
         <main className="py-20 pt-48 px-8 flex flex-col items-center bg-white text-gray-700 space-y-20 sm:space-y-32 md:space-y-48 lg:space-y-64 xl:space-y-80">
             <section className="flex flex-col gap-8 w-full items-center h-full justify-center text-center">

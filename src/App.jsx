@@ -7,7 +7,7 @@ import PersonaProfile from './pages/PersonaProfile'
 import Aplicar from './pages/Apply'
 import NotFound from './pages/NotFound'
 import Candidatura from "./pages/Candidatura"
-import getOneSignal from "./tools/getOneSignal"
+import { getOneSignal } from "./tools/Utils"
 
 export default function App() {
     useEffect(() => {

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body, html, :root {
+  background-color: white;
+  color: black;
+}
+
 ::selection, ::-moz-selection {
   background-color: rgba(246, 231, 96, 0.507);
 }

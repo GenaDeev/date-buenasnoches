@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { capitalizeFirstLetter, setTitle } from '../tools/Utils'
 
 export default function Apply() {
     const { persona } = useParams();
@@ -66,7 +67,13 @@ export default function Apply() {
             setIsError(true);
             setErrorMessage(error.message); // Use error.message instead of just error
         }
+
     };
+
+    useEffect(() => {
+        const title = "Aplica para ser pareja de " + capitalizeFirstLetter(persona) + ' | Comi Buenas Noches'
+        setTitle(title)
+    })
 
     return (
         <div className="max-w-lg mx-auto bg-white py-[64px] pt-[150px] px-6">

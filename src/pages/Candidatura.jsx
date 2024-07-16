@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NotFound from "./NotFound";
+import { capitalizeFirstLetter, setTitle } from '../tools/Utils'
+import { Spinner } from "flowbite-react";
 
 export default function Candidatura() {
     const { id } = useParams();
@@ -23,38 +25,58 @@ export default function Candidatura() {
                 setExists(false);
             }
         };
-
         fetchData();
     }, [id]);
+
+    useEffect(() => {
+        if (candidatura) {
+            let conector
+            if (candidatura.genero === "Masculino") {
+                conector = " candidato para "
+            }
+            else if (candidatura.genero === "Femenino") {
+                conector = " candidata para "
+            }
+            else {
+                conector = " candidatx para "
+            }
+            const title = candidatura.nombre + conector + capitalizeFirstLetter(candidatura.persona) + ' | Comi Buenas Noches';
+            setTitle(title);
+        }
+    })
 
     if (!exists) {
         return <NotFound />;
     }
 
     if (!candidatura) {
-        return <div className="text-center mt-8">Cargando...</div>;
+        return (
+            <div className="text-center grid h-screen place-content-center">
+                <Spinner size="xl" />
+            </div>
+        )
     }
 
     return (
-        <main className="px-4 max-w-screen-xl mx-auto pt-[125px]">
+        <main className="px-4 h-screen space-y-12 max-w-screen-xl mx-auto pt-[125px]">
             <h1 className="text-3xl">{candidatura.genero === "Masculino" ? "Candidato" : candidatura.genero === "Femenino" ? "Candidata" : "Candidatx"} para <strong className="capitalize">{candidatura.persona}</strong></h1>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                <div className="bg-white h-48 p-4 rounded-lg shadow-md">
+                <div className="bg-white hover:bg-gray-200 transition duration-200 h-48 p-4 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-2">{candidatura.nombre}</h2>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Edad:</span> {candidatura.edad}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Teléfono:</span> {candidatura.telefono}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Instagram:</span> {candidatura.instagram}</p>
                 </div>
-                <div className="bg-white h-48 p-4 rounded-lg shadow-md">
+                <div className="bg-white hover:bg-gray-200 transition duration-200 h-48 p-4 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-2">Descripción</h2>
                     <p className="text-gray-600">{candidatura.descripcion}</p>
                 </div>
-                <div className="bg-white h-48 p-4 rounded-lg shadow-md">
+                <div className="bg-white hover:bg-gray-200 transition duration-200 h-48 p-4 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-2">Preferencias</h2>
                     <p className="text-gray-600"><span className="font-semibold">Preferencia Sexual:</span> {candidatura.preferenciaSexual}</p>
                     <p className="text-gray-600"><span className="font-semibold">Género:</span> {candidatura.genero}</p>
                 </div>
-                <div className="bg-white h-48 p-4 rounded-lg shadow-md">
+                <div className="bg-white hover:bg-gray-200 transition duration-200 h-48 p-4 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-2">Artistas Favoritos</h2>
                     <p className="text-gray-600"><span className="font-semibold">Artista Favorito:</span> {candidatura.artistaFavorito}</p>
                     {candidatura.otrosArtistas.length > 0 ? <p className="text-gray-600"><span className="font-semibold">También le gustan:</span> {candidatura.otrosArtistas}</p> : <></>}

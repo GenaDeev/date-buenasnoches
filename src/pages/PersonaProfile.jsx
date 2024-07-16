@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom"
+import { useEffect } from 'react'
 import { people } from '../data/People'
 import NotFound from './NotFound'
 import Eye from "../components/Eye";
 import MusicPlayer from "../components/MusicPlayer";
+import { capitalizeFirstLetter, setTitle } from "../tools/Utils";
+
 export default function PersonaProfile() {
     const { persona } = useParams();
     const personaData = people.find(person => person.url === `/${persona}`);
@@ -11,6 +13,11 @@ export default function PersonaProfile() {
     if (!personaData) {
         return <NotFound />;
     }
+
+    useEffect(() => {
+        const title = "Perfil de " + capitalizeFirstLetter(persona) + ' | Comi Buenas Noches'
+        setTitle(title)
+    })
 
     return (
         <section className="relative pt-36 pb-24 bg-white">
