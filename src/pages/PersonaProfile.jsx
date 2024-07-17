@@ -141,7 +141,7 @@ export default function PersonaProfile() {
                                 <h3 className="font-semibold text-lg">Datos amorosos</h3>
                             </header>
                             <article className="flex flex-col px-6 justify-center">
-                                <h4>Relaciones pasadas: <strong className={personaData.couples === 0 ? "text-red-600" : personaData.couples < 4 ? "text-yellow-400" : personaData.couples >= 4 ? "text-green-900" : ""}>{personaData.couples}</strong></h4>
+                                <h4>Relaciones pasadas: <strong className={personaData.couples === 0 ? "text-red-600" : personaData.couples < 3 ? "text-yellow-400" : personaData.couples >= 3 ? "text-green-900" : ""}>{personaData.couples}</strong></h4>
                                 <h4>Género que busca: <strong>{personaData.likes === "male" ? "👨" : personaData.likes === "female" ? "👩" : "👨👩"}</strong></h4>
                             </article>
                         </div>

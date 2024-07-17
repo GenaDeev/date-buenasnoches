@@ -19,7 +19,8 @@ export const people = [
         "id": 1,
         "music": [
             smiths, lana, blur, taylor, tanbionica, fito
-        ]
+        ],
+        "couples": 1,
     },
     {
         "name": "Hele",
@@ -39,7 +40,8 @@ export const people = [
         "id": 2,
         "music": [
             louis, oasis, piojos, taylor, beatles, wos
-        ]
+        ],
+        "couples": 0,
     },
     {
         "name": "Ivan",
@@ -59,7 +61,8 @@ export const people = [
         "id": 3,
         "music": [
             gday, maneskin, wos, cuarteto, nirvana, sofadown
-        ]
+        ],
+        "couples": 2,
     },
     {
         "name": "Lola",
@@ -79,6 +82,7 @@ export const people = [
         "id": 4,
         "music": [
             charly, spinetta, frank, fito, billie, smiths
-        ]
+        ],
+        "couples": 3,
     }
 ]
