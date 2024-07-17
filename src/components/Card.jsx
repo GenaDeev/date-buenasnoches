@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { Carousel } from "flowbite-react";
+import LikeButton from './LikeButton';
+import Eye from "./Eye";
 
-import Eye
-    from "./Eye";
 export default function Card(props) {
     const { name, eyes, height, hair, age, gender, likes, url, images, ig } = props;
     return (
-        <article key={name.toLowerCase()} className="card flex flex-col w-[300px] h-[700px] bg-gray-200 hover:bg-gray-300 transition duration-200 justify-start">
+        <article key={name.toLowerCase()} className="card flex flex-col w-[350px] h-[800px] bg-gray-200 hover:bg-gray-300 transition duration-200 justify-start">
             <div id="default-carousel" className="relative w-full" data-carousel="slide">
                 <Carousel className="relative max-h-[300px] h-56 overflow-hidden rounded-t-lg md:h-96">
                     {
@@ -18,7 +18,7 @@ export default function Card(props) {
             </div>
             <div className="p-7 flex flex-col h-full">
                 <h3 className="font-bold text-2xl">{name}</h3>
-                <div className="physics flex flex-wrap gap-2">
+                <div className="physics flex flex-wrap gap-4 p-2">
                     <div title={"Altura: " + height} className="hei cursor-pointer hover:bg-gray-200 transition duration-200 w-[48px] h-[48px] flex items-center justify-center text-xl bg-white rounded-xl">{height}</div>
                     <div title={"Ojos: " + eyes} className="eye w-12 rounded-xl h-12 p-2 bg-white cursor-pointer hover:bg-gray-200 transition duration-200">
                         <Eye type={eyes} />
@@ -59,6 +59,7 @@ export default function Card(props) {
                     <a href={"https://instagram.com/" + ig} target="_blank" rel="noreferrer" className="ig cursor-pointer hover:bg-gray-200 transition duration-200 p-2 bg-white rounded-xl">
                         <img width="32px" height="32px" src="/instagram_icon.webp" />
                     </a>
+                    <LikeButton persona={name.toLowerCase()}/>
                 </div>
                 <Link className="p-2 mt-auto bg-blue-500 hover:bg-blue-400 hover:scale-105 active:scale-95 transition duration-200 rounded-xl text-white flex items-center gap-2" to={url}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" strokeWidth="3.5" stroke="#fff" fill="none" strokeLinecap="round" strokeLinejoin="round">

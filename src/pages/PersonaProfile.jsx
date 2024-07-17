@@ -6,17 +6,14 @@ import NotFound from './NotFound'
 import Eye from "../components/Eye";
 import MusicPlayer from "../components/MusicPlayer";
 import { capitalizeFirstLetter, setTitle } from "../tools/Utils";
-import { CookiesProvider, useCookies } from 'react-cookie'
+import LikeButton from "../components/LikeButton";
 
 Modal.setAppElement('#root'); // Necesario para accesibilidad
 
 export default function PersonaProfile() {
     const { persona } = useParams();
     const personaData = people.find(person => person.url === `/${persona}`);
-    const [userLikes, setUserLikes] = useState(false);
-    const [likes, setLikes] = useState(0)
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [cookies, setCookie] = useCookies(['likes-ursu', 'likes-lola', 'likes-ivan', 'likes-hele']);
 
     const openModal = () => {
         setModalIsOpen(true);
@@ -26,85 +23,10 @@ export default function PersonaProfile() {
         setModalIsOpen(false);
     };
 
-    const toggleLike = () => {
-        const newLikeState = !userLikes;
-        setUserLikes(newLikeState);
-        // Guardar el estado de like en las cookies
-        setCookie(`likes-${personaData.name.toLowerCase()}`, newLikeState, { path: '/' });
-
-        // Lógica para enviar o eliminar like (aquí iría tu código existente)
-        if (newLikeState) {
-            addLike();
-        } else {
-            deleteLike();
-        }
-        fetchLikes();
-    };
-
-    const fetchLikes = async () => {
-        try {
-            const response = await fetch(`https://filehost.comidolar.com.ar:9090/likes/${personaData.name.toLowerCase()}`);
-            if (response.ok) {
-                const data = await response.json();
-                setLikes(data.likes);
-            } else {
-                console.error('Error fetching likes')
-            }
-        } catch (error) {
-            console.error("Error fetching likes:", error);
-            setExists(false);
-        }
-    }
-
-    const addLike = async () => {
-        try {
-            const response = await fetch(`https://filehost.comidolar.com.ar:9090/likes/${personaData.name.toLowerCase()}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Error adding like');
-            }
-
-            const data = await response.json();
-            setLikes(data.likes);
-        } catch (error) {
-            console.error('Error adding like:', error);
-        }
-    };
-
-    const deleteLike = async () => {
-        try {
-            const response = await fetch(`https://filehost.comidolar.com.ar:9090/likes/${personaData.name.toLowerCase()}`, {
-                method: 'DELETE',
-            });
-
-            if (!response.ok) {
-                throw new Error('Error deleting like');
-            }
-
-            const data = await response.json();
-            setLikes(data.likes);
-        } catch (error) {
-            console.error('Error deleting like:', error);
-        }
-    };
-
     useEffect(() => {
         const title = "Perfil de " + capitalizeFirstLetter(persona) + ' | Comi Buenas Noches'
         setTitle(title)
     }, [persona])
-
-    useEffect(() => {
-        fetchLikes()
-    })
-    
-    useEffect(() => {
-        setUserLikes(cookies[`likes-${personaData.name.toLowerCase()}`]);
-    }, [personaData.name, cookies]);
 
     if (!personaData) {
         return <NotFound />;
@@ -177,46 +99,7 @@ export default function PersonaProfile() {
                                 strokeWidth="1.6" strokeLinecap="round" />
                         </svg>
                     </a>
-                    <button
-                        onClick={toggleLike}
-                        className="p-3 rounded-full flex items-center stroke-gray-400 border border-solid border-gray-300 bg-gray-50 group transition-all duration-200 hover:bg-gray-200 hover:border-gray-200">
-                        {
-                            !userLikes ?
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20"
-                                    height="20"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2.5"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <path d="M19.5 12.572L12 20l-7.5-7.428A5 5 0 1112 6.006a5 5 0 117.5 6.572"></path>
-                                </svg> :
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20"
-                                    height="20"
-                                    fill="none"
-                                    stroke="red"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2.5"
-                                    viewBox="0 0 24 24"
-                                    className="text-red-700"
-                                >
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <path
-                                        fill="currentColor"
-                                        strokeWidth="0"
-                                        d="M6.979 3.074a6 6 0 014.988 1.425l.037.033.034-.03a6 6 0 014.733-1.44l.246.036a6 6 0 013.364 10.008l-.18.185-.048.041-7.45 7.379a1 1 0 01-1.313.082l-.094-.082-7.493-7.422A6 6 0 016.979 3.074z"
-                                    ></path>
-                                </svg>
-                        }
-                        <span>{likes}</span>
-                    </button>
+                    <LikeButton persona={personaData.name.toLowerCase()}/>
                 </div>
                 <div className="w-full flex flex-col items-center text-gray-900 mt-32">
                     <h2 className="text-3xl font-bold">
