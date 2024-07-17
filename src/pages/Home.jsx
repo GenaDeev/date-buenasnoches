@@ -1,9 +1,11 @@
 import Card from "../components/Card";
 import { people } from "../data/People"
+import { Helmet } from "react-helmet";
 
 export default function Home() {
     return (
         <main className="py-20 pt-48 px-8 flex flex-col items-center bg-white text-gray-700 space-y-20 sm:space-y-32 md:space-y-48 lg:space-y-64 xl:space-y-80">
+            <Helmet><title>Comi Buenas Noches | Sali con un admin.</title></Helmet>
             <section className="flex flex-col gap-8 w-full items-center h-full justify-center text-center">
                 <h1 className="p-2 gradient-text font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:max-w-[60%]">
                     Admins de
