@@ -35,7 +35,7 @@ export default function PersonaProfile() {
     return (
         <section className="relative pt-36 pb-24 bg-white">
             <img src="https://pagedone.io/asset/uploads/1705471739.png" alt="cover-image" className="w-full absolute top-0 left-0 z-0 h-60" />
-            <div className="w-full mx-auto md:px-8 px-20">
+            <div className="w-full mx-auto md:px-8 px-12">
                 <div className="flex items-center justify-center relative z-1 mb-2.5">
                     <img src={personaData.images[0]} alt="user-avatar-image" onClick={openModal} className="hover:scale-105 transition duration-200 shadow-xl hover:shadow-2xl border-4 border-solid border-white rounded-full object-cover w-[162px] h-[162px] cursor-pointer" />
                 </div>
