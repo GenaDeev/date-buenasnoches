@@ -84,7 +84,7 @@ export default function LikeButton({ persona }) {
     return (
         <button
             onClick={toggleLike}
-            className="p-3 rounded-full flex items-center stroke-gray-400 border border-solid border-gray-300 bg-gray-50 group transition-all duration-200 hover:bg-gray-200 hover:border-gray-200">
+            className="p-3 rounded-full gap-1 flex items-center stroke-gray-400 border border-solid border-gray-300 bg-gray-50 group transition-all duration-200 hover:bg-gray-200 hover:border-gray-200">
             {
                 !userLikes ?
                     <svg
