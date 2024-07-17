@@ -24,15 +24,41 @@ export default function Apply() {
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
+    const formatPhoneNumber = (phone) => {
+        // limpar numero
+        const cleaned = phone.replace(/\D/g, '');
+
+        // casos específicos
+        if (cleaned.startsWith('549')) {
+            // si esta bien
+            return cleaned;
+        } else if (cleaned.startsWith('9')) {
+            // si le falta el 54
+            return `54${cleaned}`;
+        } else if (cleaned.startsWith('54') && !cleaned.startsWith('549')) {
+            // si le falta el 9
+            return cleaned.slice(0, 2) + '9' + cleaned.slice(2);
+        } else if (cleaned.startsWith('0')) {
+            // si tiene 011
+            return '549' + cleaned.slice(1);
+        } else {
+            // otros
+            return `549${cleaned}`;
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const id = uuidv4()
-        setId(id)
+        const id = uuidv4();
+        setId(id);
+
+        const formattedTelefono = formatPhoneNumber(telefono);
+
         const formData = {
             id,
             nombre,
             edad,
-            telefono,
+            telefono: formattedTelefono,
             instagram,
             descripcion,
             preferenciaSexual,
@@ -67,7 +93,6 @@ export default function Apply() {
             setIsError(true);
             setErrorMessage(error.message); // Use error.message instead of just error
         }
-
     };
 
     useEffect(() => {
