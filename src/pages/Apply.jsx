@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { capitalizeFirstLetter, setTitle } from '../tools/Utils'
-
+import { Helmet } from 'react-helmet';
 export default function Apply() {
     const { persona } = useParams();
     const [globalId, setId] = useState('')
@@ -95,13 +95,37 @@ export default function Apply() {
         }
     };
 
-    useEffect(() => {
-        const title = "Aplica para ser pareja de " + capitalizeFirstLetter(persona) + ' | Comi Buenas Noches'
-        setTitle(title)
-    })
-
+    const title = "Aplica para ser pareja de " + capitalizeFirstLetter(persona) + ' | Comi Buenas Noches'
+    
     return (
         <div className="max-w-lg mx-auto bg-white py-[64px] pt-[150px] px-6">
+            <Helmet>
+                <title>{title}</title>
+                <meta name="description"
+                    content={"Formulario para pedir ser pareja de "+ persona + ", un admin de Comi Buenas Noches que busca pareja. Lo lograras?"} />
+                <meta property="og:type" content="article" />
+                <meta property="og:title" content={title} />
+                <meta property="og:url" content={"https://comibuenasnoches.vercel.app/apply/"+persona} />
+                <meta property="og:image" content="https://comibuenasnoches.vercel.app/og.webp" />
+                <meta property="og:description"
+                    content={"Formulario para pedir ser pareja de "+ persona + ", un admin de Comi Buenas Noches que busca pareja. Lo lograras?"} />
+                <meta property="article:author" content="GenaDeev" />
+                <meta property="article:section" content="Dating" />
+                <meta property="article:tag" content="love" />
+                <meta property="article:tag" content="romance" />
+                <meta property="article:tag" content="date" />
+                <meta property="article:tag" content="pareja" />
+                <meta property="article:tag" content="conocer" />
+                <meta property="article:tag" content="novio" />
+                <meta property="article:tag" content="novia" />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:title" content={title} />
+                <meta name="twitter:site" content="@genaaaaj" />
+                <meta name="twitter:description"
+                    content={"Formulario para pedir ser pareja de "+ persona + ", un admin de Comi Buenas Noches que busca pareja. Lo lograras?"} />
+                <meta name="twitter:image" content="https://comibuenasnoches.vercel.app/og.webp" />
+                <meta name="twitter:image:alt" content="Sitio web de Comi Buenas Noches" />
+            </Helmet>
             {!isCompleted && !isError && (
                 <div>
                     <h1 className='text-4xl mb-12'>Solicitud para <strong className='capitalize'>{persona}</strong></h1>

@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Modal from 'react-modal';
 import { people } from '../data/People'
 import NotFound from './NotFound'
@@ -7,6 +7,7 @@ import Eye from "../components/Eye";
 import MusicPlayer from "../components/MusicPlayer";
 import { capitalizeFirstLetter, setTitle } from "../tools/Utils";
 import LikeButton from "../components/LikeButton";
+import { Helmet } from 'react-helmet'
 
 Modal.setAppElement('#root'); // Necesario para accesibilidad
 
@@ -23,17 +24,51 @@ export default function PersonaProfile() {
         setModalIsOpen(false);
     };
 
-    useEffect(() => {
-        const title = "Perfil de " + capitalizeFirstLetter(persona) + ' | Comi Buenas Noches'
-        setTitle(title)
-    }, [persona])
-
     if (!personaData) {
         return <NotFound />;
     }
 
+    const getImage = () => {
+        let image
+        if (persona === "ursu") {
+            image = "ursu.webp"
+        }
+        else if (persona === "hele") {
+            image = "hele.webp"
+        }
+        else if (persona === "ivan") {
+            image = "ivan.webp"
+        }
+        else {
+            image = "loli.webp"
+        }
+        return image
+    }
+
+    const title = "Perfil de " + capitalizeFirstLetter(persona) + ' | Comi Buenas Noches'
+    const image = getImage()
     return (
         <section className="relative pt-36 pb-24 bg-white">
+            <Helmet>
+                <title>{title}</title>
+                <meta name="description"
+                    content={"Perfil de " + persona + ", un admin de Comi Buenas Noches que busca pareja! Conoce todo sobre " + persona + " para asegurarte de estar interesadx."} />
+                <meta property="og:title" content={title} />
+                <meta property="og:type" content="profile" />
+                <meta property="og:url" content={"https://comibuenasnoches.vercel.app/" + persona} />
+                <meta property="og:image" content={"https://comibuenasnoches.vercel.app/" + image} />
+                <meta property="og:description" content="Perfil de ursu, un admin de Comi Buenas Noches que busca pareja! Conoce todo sobre ursu para asegurarte de estar interesadx." />
+                <meta property="profile:first_name" content="Ursula" />
+                <meta property="profile:last_name" content="Maldonado" />
+                <meta property="profile:username" content="ursu.em_"/>
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:title" content={title} />
+                <meta name="twitter:site" content="@genaaaaj" />
+                <meta name="twitter:description"
+                    content={"Perfil de " + persona + ", un admin de Comi Buenas Noches que busca pareja! Conoce todo sobre " + persona + " para asegurarte de estar interesadx."} />
+                <meta name="twitter:image" content="https://comibuenasnoches.vercel.app/og.webp" />
+                <meta name="twitter:image:alt" content="Sitio web de Comi Buenas Noches" />
+            </Helmet>
             <img src="https://pagedone.io/asset/uploads/1705471739.png" alt="cover-image" className="w-full absolute top-0 left-0 z-0 h-60" />
             <div className="w-full mx-auto md:px-8 px-12">
                 <div className="flex items-center justify-center relative z-1 mb-2.5">
@@ -99,7 +134,7 @@ export default function PersonaProfile() {
                                 strokeWidth="1.6" strokeLinecap="round" />
                         </svg>
                     </a>
-                    <LikeButton persona={personaData.name.toLowerCase()}/>
+                    <LikeButton persona={personaData.name.toLowerCase()} />
                 </div>
                 <div className="w-full flex flex-col items-center text-gray-900 mt-32">
                     <h2 className="text-3xl font-bold">

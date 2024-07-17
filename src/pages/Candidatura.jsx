@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import NotFound from "./NotFound";
 import { capitalizeFirstLetter, setTitle } from '../tools/Utils'
 import { Spinner } from "flowbite-react";
+import { Helmet } from 'react-helmet'
 
 export default function Candidatura() {
     const { id } = useParams();
@@ -28,7 +29,7 @@ export default function Candidatura() {
         fetchData();
     }, [id]);
 
-    useEffect(() => {
+    const getTitle = () => {
         if (candidatura) {
             let conector
             if (candidatura.genero === "Masculino") {
@@ -41,9 +42,9 @@ export default function Candidatura() {
                 conector = " candidatx para "
             }
             const title = candidatura.nombre + conector + capitalizeFirstLetter(candidatura.persona) + ' | Comi Buenas Noches';
-            setTitle(title);
+            return title;
         }
-    })
+    }
 
     if (!exists) {
         return <NotFound />;
@@ -56,9 +57,36 @@ export default function Candidatura() {
             </div>
         )
     }
-
+    const title = getTitle();
     return (
         <main className="px-4 h-screen space-y-12 max-w-screen-xl mx-auto pt-[125px]">
+            <Helmet>
+                <title>{title}</title>
+                <meta name="description"
+                    content={"Candidatura de "+candidatura.nombre+ "para "+candidatura.persona+", un admin de Comi Buenas Noches"} />
+                <meta property="og:type" content="article" />
+                <meta property="og:title" content={title} />
+                <meta property="og:url" content={"https://comibuenasnoches.vercel.app/apply/"+persona} />
+                <meta property="og:image" content="https://comibuenasnoches.vercel.app/og.webp" />
+                <meta property="og:description"
+                    content={"Candidatura de "+candidatura.nombre+ "para "+candidatura.persona+", un admin de Comi Buenas Noches"} />
+                <meta property="article:author" content="GenaDeev" />
+                <meta property="article:section" content="Dating" />
+                <meta property="article:tag" content="love" />
+                <meta property="article:tag" content="romance" />
+                <meta property="article:tag" content="date" />
+                <meta property="article:tag" content="pareja" />
+                <meta property="article:tag" content="conocer" />
+                <meta property="article:tag" content="novio" />
+                <meta property="article:tag" content="novia" />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:title" content={title} />
+                <meta name="twitter:site" content="@genaaaaj" />
+                <meta name="twitter:description"
+                    content={"Candidatura de "+candidatura.nombre+ "para "+candidatura.persona+", un admin de Comi Buenas Noches"} />
+                <meta name="twitter:image" content="https://comibuenasnoches.vercel.app/og.webp" />
+                <meta name="twitter:image:alt" content="Sitio web de Comi Buenas Noches" />
+            </Helmet>
             <h1 className="text-3xl">{candidatura.genero === "Masculino" ? "Candidato" : candidatura.genero === "Femenino" ? "Candidata" : "Candidatx"} para <strong className="capitalize">{candidatura.persona}</strong></h1>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <div className="bg-white hover:bg-gray-200 transition duration-200 h-48 p-4 rounded-lg shadow-md">
