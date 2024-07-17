@@ -1,37 +1,9 @@
 import Card from "../components/Card";
 import { people } from "../data/People"
-import { Helmet } from 'react-helmet'
 
 export default function Home() {
     return (
         <main className="py-20 pt-48 px-8 flex flex-col items-center bg-white text-gray-700 space-y-20 sm:space-y-32 md:space-y-48 lg:space-y-64 xl:space-y-80">
-            <Helmet>
-                <title>Comi Buenas Noches | Sali con un admin.</title>
-                <meta name="description"
-                    content="Postúlate para ser la Pareja Perfecta de uno de los Administradores de Comi Buenas Noches: ¡Ursu, Hele, Ivan o Lola te Esperan!" />
-                <meta property="og:type" content="article" />
-                <meta property="og:title" content="Comi Buenas Noches | Sali con un admin." />
-                <meta property="og:url" content="https://comibuenasnoches.vercel.app/" />
-                <meta property="og:image" content="https://comibuenasnoches.vercel.app/og.webp" />
-                <meta property="og:description"
-                    content="Postúlate para ser la Pareja Perfecta de uno de los Administradores de Comi Buenas Noches: ¡Ursu, Hele, Ivan o Lola te Esperan!" />
-                <meta property="article:author" content="GenaDeev" />
-                <meta property="article:section" content="Dating" />
-                <meta property="article:tag" content="love" />
-                <meta property="article:tag" content="romance" />
-                <meta property="article:tag" content="date" />
-                <meta property="article:tag" content="pareja" />
-                <meta property="article:tag" content="conocer" />
-                <meta property="article:tag" content="novio" />
-                <meta property="article:tag" content="novia" />
-                <meta name="twitter:card" content="summary" />
-                <meta name="twitter:title" content="Comi Buenas Noches | Sali con un admin." />
-                <meta name="twitter:site" content="@genaaaaj" />
-                <meta name="twitter:description"
-                    content="Postúlate para ser la Pareja Perfecta de uno de los Administradores de Comi Buenas Noches: ¡Ursu, Hele, Ivan o Lola te Esperan!" />
-                <meta name="twitter:image" content="https://comibuenasnoches.vercel.app/og.webp" />
-                <meta name="twitter:image:alt" content="Sitio web de Comi Buenas Noches" />
-            </Helmet>
             <section className="flex flex-col gap-8 w-full items-center h-full justify-center text-center">
                 <h1 className="p-2 gradient-text font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:max-w-[60%]">
                     Admins de
